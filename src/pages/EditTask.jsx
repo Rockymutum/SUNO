@@ -3,10 +3,12 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Textarea } from '@/components/ui/Textarea'
+import { Select } from '@/components/ui/Select'
 import { Camera, MapPin, ChevronLeft, X, Loader2 } from 'lucide-react'
 import { supabase, uploadImage, deleteImage } from '@/lib/supabase'
 import { useAuth } from '@/context/AuthContext'
 import { motion } from 'framer-motion'
+import { CATEGORIES } from '@/lib/constants'
 
 export default function EditTask() {
     const { id } = useParams()
@@ -17,6 +19,7 @@ export default function EditTask() {
     const [fetching, setFetching] = useState(true)
     const [images, setImages] = useState([])
     const [deletedImages, setDeletedImages] = useState([])
+    const [errors, setErrors] = useState({})
     const [formData, setFormData] = useState({
         title: '',
         description: '',
@@ -68,6 +71,10 @@ export default function EditTask() {
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
+        // Clear error for this field when user starts typing
+        if (errors[e.target.name]) {
+            setErrors({ ...errors, [e.target.name]: null })
+        }
     }
 
     const handleImageUpload = async (e) => {
@@ -88,7 +95,22 @@ export default function EditTask() {
         }
     }
 
+    const validateForm = () => {
+        const newErrors = {}
+        if (!formData.title?.trim()) newErrors.title = 'Title is required'
+        if (!formData.description?.trim()) newErrors.description = 'Description is required'
+        if (!formData.category?.trim()) newErrors.category = 'Category is required'
+        if (!formData.budget_min) newErrors.budget_min = 'Min budget is required'
+        if (!formData.budget_max) newErrors.budget_max = 'Max budget is required'
+        if (!formData.location?.trim()) newErrors.location = 'Location is required'
+        setErrors(newErrors)
+        return Object.keys(newErrors).length === 0
+    }
+
     const handleSubmit = async () => {
+        if (!validateForm()) {
+            return
+        }
         if (!user) return
         setLoading(true)
 
@@ -149,6 +171,7 @@ export default function EditTask() {
                     name="title"
                     value={formData.title}
                     onChange={handleChange}
+                    error={errors.title}
                 />
 
                 <Textarea
@@ -157,13 +180,17 @@ export default function EditTask() {
                     value={formData.description}
                     onChange={handleChange}
                     className="min-h-[150px]"
+                    error={errors.description}
                 />
 
-                <Input
+                <Select
                     label="Category"
                     name="category"
                     value={formData.category}
                     onChange={handleChange}
+                    options={CATEGORIES.map(cat => ({ value: cat.id, label: cat.name }))}
+                    placeholder="Select a category"
+                    error={errors.category}
                 />
 
                 {/* Photo Upload */}
@@ -199,6 +226,7 @@ export default function EditTask() {
                         type="number"
                         value={formData.budget_min}
                         onChange={handleChange}
+                        error={errors.budget_min}
                     />
                     <Input
                         label="Max Budget"
@@ -206,6 +234,7 @@ export default function EditTask() {
                         type="number"
                         value={formData.budget_max}
                         onChange={handleChange}
+                        error={errors.budget_max}
                     />
                 </div>
 
@@ -215,6 +244,7 @@ export default function EditTask() {
                     value={formData.location}
                     onChange={handleChange}
                     icon={<MapPin size={18} />}
+                    error={errors.location}
                 />
 
                 <Button onClick={handleSubmit} isLoading={loading} className="w-full h-12 text-lg mt-4">

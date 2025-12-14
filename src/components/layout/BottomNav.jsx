@@ -15,7 +15,7 @@ export default function BottomNav() {
 
     return (
         <nav className="fixed bottom-0 left-0 right-0 bg-surface border-t border-gray-100 pb-safe pt-2 px-6 z-50">
-            <div className="flex justify-between items-center max-w-md mx-auto h-16">
+            <div className="grid grid-cols-4 items-center max-w-md mx-auto h-16 w-full">
                 {navItems.map((item) => {
                     const isActive = location.pathname === item.path ||
                         (item.path !== '/' && location.pathname.startsWith(item.path))
@@ -24,12 +24,12 @@ export default function BottomNav() {
                         <Link
                             key={item.name}
                             to={item.path}
-                            className="flex flex-col items-center justify-center w-12 h-12 relative"
+                            className="flex flex-col items-center justify-center h-full relative active:scale-95 transition-transform"
                         >
                             {isActive && (
                                 <motion.div
                                     layoutId="nav-pill"
-                                    className="absolute -top-2 w-8 h-1 bg-primary rounded-full"
+                                    className="absolute -top-2 w-12 h-1 bg-primary rounded-full"
                                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                                 />
                             )}

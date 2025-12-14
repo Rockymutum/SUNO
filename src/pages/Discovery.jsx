@@ -1,15 +1,18 @@
-import { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { TaskCard } from '@/components/TaskCard'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
-import { Plus, Search } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Plus, Search, X } from 'lucide-react'
+import { Link, useOutletContext } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
 import { supabase } from '@/lib/supabase'
 
 export default function Discovery() {
+    // Get search visibility control from Layout
+    const { isSearchOpen, setIsSearchOpen } = useOutletContext() || { isSearchOpen: true, setIsSearchOpen: () => { } }
+
     const [searchTerm, setSearchTerm] = useState('')
     const { data: tasks = [], isLoading: loading } = useQuery({
         queryKey: ['tasks'],
@@ -40,6 +43,26 @@ export default function Discovery() {
         )
     })
 
+
+
+    // Click outside to close search
+    const searchRef = useRef(null)
+
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (searchRef.current && !searchRef.current.contains(event.target)) {
+                // If search is open, close it
+                if (isSearchOpen) setIsSearchOpen(false)
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside)
+        document.addEventListener("touchstart", handleClickOutside)
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside)
+            document.removeEventListener("touchstart", handleClickOutside)
+        }
+    }, [isSearchOpen, setIsSearchOpen])
+
     return (
         <div className="pb-10 relative min-h-full">
             {/* Create Task Floating Button */}
@@ -54,11 +77,20 @@ export default function Discovery() {
             </Link>
 
             <div className="space-y-4">
-                <div className="sticky top-0 z-30 bg-gray-50/95 backdrop-blur py-2 -mx-4 px-4 mb-4 border-b border-gray-100">
-                    <div className="relative">
+                {/* Search Bar Placeholder to prevent content jump - only show if search is OPEN */}
+                {isSearchOpen && <div className="h-14 mb-4 transition-all duration-300" />}
+
+                {/* Fixed Search Bar */}
+                <div
+                    className={`fixed top-14 left-0 right-0 z-40 w-full max-w-md mx-auto px-4 pt-0 pb-3 transition-all duration-300 ease-in-out ${isSearchOpen
+                        ? 'translate-y-0 opacity-100 pointer-events-auto'
+                        : '-translate-y-full opacity-0 pointer-events-none'
+                        }`}
+                >
+                    <div ref={searchRef} className="relative">
                         <Input
-                            placeholder="Search tasks, location, category..."
-                            className="pl-10 bg-white shadow-sm border-gray-200"
+                            placeholder="Search tasks..."
+                            className="pl-10 bg-white shadow-xl border-gray-200"
                             value={searchTerm}
                             onChange={e => setSearchTerm(e.target.value)}
                         />

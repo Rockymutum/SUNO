@@ -3,7 +3,7 @@ import { ChevronLeft } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { twMerge } from 'tailwind-merge'
 
-export function Select({ label, value, onChange, options, placeholder = "Select option", name, className }) {
+export function Select({ label, value, onChange, options, placeholder = "Select option", name, className, error }) {
     const [isOpen, setIsOpen] = useState(false)
     const containerRef = useRef(null)
 
@@ -36,13 +36,14 @@ export function Select({ label, value, onChange, options, placeholder = "Select 
 
     return (
         <div className="w-full space-y-1.5" ref={containerRef}>
-            {label && <label className="text-xs font-bold text-gray-400 uppercase tracking-wider ml-1">{label}</label>}
+            {label && <label className="text-xs font-bold text-muted uppercase tracking-wider ml-1">{label}</label>}
             <div className="relative">
                 <button
                     type="button"
                     onClick={() => setIsOpen(!isOpen)}
                     className={twMerge(
                         "w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-left flex items-center justify-between focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/10 transition-colors",
+                        error && "border-red-500 focus:border-red-500 focus:ring-red-500/10",
                         className
                     )}
                 >
@@ -84,6 +85,7 @@ export function Select({ label, value, onChange, options, placeholder = "Select 
                     )}
                 </AnimatePresence>
             </div>
+            {error && <span className="text-xs text-red-500 ml-1">{error}</span>}
         </div>
     )
 }

@@ -5,10 +5,12 @@ import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Textarea } from '@/components/ui/Textarea'
 import { Badge } from '@/components/ui/Badge'
+import { Select } from '@/components/ui/Select'
 import { X, Camera, MapPin, ChevronLeft } from 'lucide-react'
 import { supabase, uploadImage } from '@/lib/supabase'
 import { useAuth } from '@/context/AuthContext'
 import { motion } from 'framer-motion'
+import { CATEGORIES } from '@/lib/constants'
 
 export default function TaskCreate() {
     const navigate = useNavigate()
@@ -143,13 +145,13 @@ export default function TaskCreate() {
                             error={errors.description}
                         />
 
-                        <Input
+                        <Select
                             label="Category"
                             name="category"
-                            placeholder="e.g. Plumbing"
                             value={formData.category}
                             onChange={handleChange}
-                            error={errors.category}
+                            options={CATEGORIES.map(cat => ({ value: cat.id, label: cat.name }))}
+                            placeholder="Select a category"
                         />
 
                         <Button onClick={() => {

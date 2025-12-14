@@ -3,7 +3,7 @@ import { Bell, Search } from 'lucide-react'
 import { useAuth } from '@/context/AuthContext'
 import { usePushNotifications } from '@/hooks/usePushNotifications'
 
-export default function TopBar() {
+export default function TopBar({ onSearchClick }) {
     const location = useLocation()
     const { user } = useAuth()
     const navigate = useNavigate()
@@ -40,7 +40,10 @@ export default function TopBar() {
                     </button>
                 )}
                 {location.pathname === '/' && (
-                    <button className="text-primary hover:text-gray-600 transition-colors">
+                    <button
+                        onClick={onSearchClick}
+                        className="text-primary hover:text-gray-600 transition-colors"
+                    >
                         <Search size={20} strokeWidth={2} />
                     </button>
                 )}

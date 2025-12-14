@@ -1,4 +1,5 @@
 import { Outlet, useLocation } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import BottomNav from './BottomNav'
 import TopBar from './TopBar'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -12,16 +13,25 @@ export default function Layout() {
         location.pathname.startsWith('/worker/') ||
         location.pathname === '/profile/edit' ||
         location.pathname === '/welcome' ||
+        location.pathname === '/auth' ||
         location.pathname.startsWith('/profile/public/')
 
     const showNav = !isFullScreen
+
+    // Search visibility state shared between TopBar and Pages
+    const [isSearchOpen, setIsSearchOpen] = useState(false)
+
+    // Automatically close search when route changes
+    useEffect(() => {
+        setIsSearchOpen(false)
+    }, [location.pathname])
 
     return (
         <div className="fixed inset-0 bg-background text-primary font-sans flex flex-col overflow-hidden">
             {/* Background fill */}
             <div className="absolute inset-0 z-0 bg-background" />
 
-            {showNav && <TopBar />}
+            {showNav && <TopBar onSearchClick={() => setIsSearchOpen(true)} />}
 
             <main className="flex-1 relative z-10 w-full max-w-md mx-auto">
                 <AnimatePresence mode='wait' initial={false}>
@@ -31,10 +41,10 @@ export default function Layout() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -8 }}
                         transition={{ duration: 0.2, ease: "easeOut" }}
-                        className={`absolute inset-0 overflow-y-auto overflow-x-hidden bg-background no-scrollbar shadow-none ${isFullScreen ? '' : 'px-5 pt-20 pb-24'
+                        className={`absolute inset-0 overflow-y-auto overflow-x-hidden bg-background no-scrollbar shadow-none ${isFullScreen ? '' : 'px-5 pt-16 pb-24'
                             }`}
                     >
-                        <Outlet />
+                        <Outlet context={{ isSearchOpen, setIsSearchOpen }} />
                     </motion.div>
                 </AnimatePresence>
             </main>

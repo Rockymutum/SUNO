@@ -37,6 +37,7 @@ export default function Auth() {
                     email: formData.email,
                     password: formData.password,
                     options: {
+                        emailRedirectTo: window.location.origin,
                         data: {
                             full_name: formData.fullName,
                             avatar_url: `https://api.dicebear.com/7.x/initials/svg?seed=${formData.fullName}`
