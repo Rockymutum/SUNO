@@ -82,7 +82,7 @@ export default function Welcome() {
                                         animate={{ rotateX: 0, opacity: 1, y: 0 }}
                                         exit={{ rotateX: -90, opacity: 0, y: 10 }}
                                         transition={{ duration: 0.5, ease: "backOut" }}
-                                        className="bg-white px-4 py-2 rounded-full shadow-lg border border-gray-100 flex items-center gap-2"
+                                        className="bg-white px-4 py-2 rounded-full shadow-lg border border-gray-100 flex items-center gap-2 backface-hidden"
                                     >
                                         <div className="p-1.5 bg-green-100 rounded-full text-green-600"><Shield size={12} fill="currentColor" /></div>
                                         <span className="text-xs font-bold text-gray-700 uppercase tracking-wider">Verified Secure</span>
@@ -94,7 +94,7 @@ export default function Welcome() {
                                         animate={{ rotateX: 0, opacity: 1, y: 0 }}
                                         exit={{ rotateX: -90, opacity: 0, y: 10 }}
                                         transition={{ duration: 0.5, ease: "backOut" }}
-                                        className="bg-white px-4 py-2 rounded-full shadow-lg border border-gray-100 flex items-center gap-2"
+                                        className="bg-white px-4 py-2 rounded-full shadow-lg border border-gray-100 flex items-center gap-2 backface-hidden"
                                     >
                                         <div className="p-1.5 bg-blue-100 rounded-full text-blue-600"><Zap size={12} fill="currentColor" /></div>
                                         <span className="text-xs font-bold text-gray-700 uppercase tracking-wider">Instant Access</span>
@@ -111,7 +111,7 @@ export default function Welcome() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.3 }}
-                        className="text-4xl font-extrabold tracking-wide text-primary uppercase leading-tight"
+                        className="text-5xl font-black tracking-tighter text-primary uppercase leading-none font-tech"
                     >
                         SUNOMSI
                     </motion.h1>
@@ -119,7 +119,7 @@ export default function Welcome() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.5 }}
-                        className="text-gray-600 text-base font-medium leading-relaxed max-w-sm mx-auto"
+                        className="text-slate-500 text-sm font-medium leading-relaxed max-w-sm mx-auto font-sans tracking-tight"
                     >
                         Access top-rated professionals for any task, instantly. Verified, secure, and fast.
                     </motion.p>

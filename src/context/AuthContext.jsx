@@ -84,7 +84,12 @@ export const AuthProvider = ({ children }) => {
         user,
         profile,
         loading,
-        signInWithGoogle: () => supabase.auth.signInWithOAuth({ provider: 'google' }),
+        signInWithGoogle: () => supabase.auth.signInWithOAuth({
+            provider: 'google',
+            options: {
+                redirectTo: window.location.origin
+            }
+        }),
         signOut: () => supabase.auth.signOut(),
     }
 

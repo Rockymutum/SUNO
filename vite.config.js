@@ -62,6 +62,9 @@ export default defineConfig({
         enabled: true,
         type: 'module',
       },
+      server: {
+        host: true
+      }
     })
   ],
   resolve: {

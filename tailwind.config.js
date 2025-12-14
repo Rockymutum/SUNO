@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Manrope', 'sans-serif'],
+        sans: ['Outfit', 'sans-serif'],
+        tech: ['Space Grotesk', 'sans-serif'],
       },
       colors: {
         background: '#F9FAFB',
@@ -42,6 +43,11 @@ export default {
         '.pr-safe': { 'padding-right': 'env(safe-area-inset-right)' },
         '.mt-safe': { 'margin-top': 'env(safe-area-inset-top)' },
         '.mb-safe': { 'margin-bottom': 'env(safe-area-inset-bottom)' },
+        '.perspective-1000': { 'perspective': '1000px' },
+        '.perspective-none': { 'perspective': 'none' },
+        '.transform-style-3d': { 'transform-style': 'preserve-3d' },
+        '.backface-hidden': { 'backface-visibility': 'hidden' },
+        '.rotate-x-90': { 'transform': 'rotateX(90deg)' },
       })
     }
   ],
