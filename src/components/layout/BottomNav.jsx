@@ -14,39 +14,41 @@ export default function BottomNav() {
     ]
 
     return (
-        <nav className="fixed bottom-0 left-0 right-0 bg-surface border-t border-gray-100 pb-safe pt-2 px-6 z-50 h-auto">
-            <div className="flex justify-between items-center max-w-md mx-auto h-16">
-                {navItems.map((item) => {
-                    const isActive = location.pathname === item.path ||
-                        (item.path !== '/' && location.pathname.startsWith(item.path))
+        <nav className="fixed bottom-0 left-0 right-0 pb-safe z-50 px-4">
+            <div className="max-w-md mx-auto mb-4 bg-surface/80 backdrop-blur-md rounded-3xl shadow-lg border border-gray-100/50">
+                <div className="flex justify-between items-center h-16 px-6">
+                    {navItems.map((item) => {
+                        const isActive = location.pathname === item.path ||
+                            (item.path !== '/' && location.pathname.startsWith(item.path))
 
-                    return (
-                        <Link
-                            key={item.name}
-                            to={item.path}
-                            className="flex flex-col items-center justify-center relative"
-                        >
-                            {isActive && (
-                                <motion.div
-                                    layoutId="nav-pill"
-                                    className="absolute -top-2 w-12 h-1 bg-primary rounded-full"
-                                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                                />
-                            )}
-                            <item.icon
-                                size={22}
-                                className={clsx(
-                                    "transition-colors duration-200",
-                                    isActive ? "text-primary" : "text-gray-400"
+                        return (
+                            <Link
+                                key={item.name}
+                                to={item.path}
+                                className="flex flex-col items-center justify-center relative"
+                            >
+                                {isActive && (
+                                    <motion.div
+                                        layoutId="nav-pill"
+                                        className="absolute -top-2 w-12 h-1 bg-primary rounded-full"
+                                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                    />
                                 )}
-                                strokeWidth={isActive ? 2.5 : 2}
-                            />
-                            <span className={clsx("text-[10px] uppercase tracking-wide mt-1 font-medium", isActive ? "text-primary" : "text-gray-400")}>
-                                {item.name}
-                            </span>
-                        </Link>
-                    )
-                })}
+                                <item.icon
+                                    size={22}
+                                    className={clsx(
+                                        "transition-colors duration-200",
+                                        isActive ? "text-primary" : "text-gray-400"
+                                    )}
+                                    strokeWidth={isActive ? 2.5 : 2}
+                                />
+                                <span className={clsx("text-[10px] uppercase tracking-wide mt-1 font-medium", isActive ? "text-primary" : "text-gray-400")}>
+                                    {item.name}
+                                </span>
+                            </Link>
+                        )
+                    })}
+                </div>
             </div>
         </nav>
     )
