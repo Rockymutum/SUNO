@@ -247,7 +247,7 @@ export default function WorkerProfile() {
             </div>
 
             {/* Fixed Action Bar */}
-            <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 p-4 px-6 pb-8 flex gap-3 z-50 max-w-md mx-auto">
+            <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 p-4 px-6 pb-[calc(2rem+env(safe-area-inset-bottom))] flex gap-3 z-50 max-w-md mx-auto">
                 <Button
                     className="flex-1 bg-black hover:bg-gray-800 text-white shadow-lg shadow-gray-200 h-12 text-base font-medium rounded-xl"
                     disabled={startingChat}

@@ -58,7 +58,7 @@ export default function OfferModal({ task, isOpen, onClose, onOfferSubmitted }) 
                         initial={{ opacity: 0, y: 100 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 100 }}
-                        className="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl p-6 z-[70] max-w-md mx-auto"
+                        className="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl p-6 pb-[calc(1.5rem+env(safe-area-inset-bottom))] z-[70] max-w-md mx-auto"
                     >
                         <div className="flex justify-between items-center mb-6">
                             <h2 className="text-xl font-bold">Make an Offer</h2>

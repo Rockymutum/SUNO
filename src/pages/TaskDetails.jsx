@@ -196,7 +196,7 @@ export default function TaskDetails() {
     const isOwner = user?.id === task.created_by
 
     return (
-        <div className="bg-white min-h-screen pb-24 relative">
+        <div className="bg-white min-h-screen pb-[calc(6rem+env(safe-area-inset-bottom))] relative">
 
 
             {/* Header Image with Back Button */}
@@ -316,7 +316,7 @@ export default function TaskDetails() {
 
             {/* Mark Completed Action for Owner */}
             {isOwner && task.status === 'in_progress' && (
-                <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 p-4 px-6 pb-8 flex gap-3 z-50 max-w-md mx-auto">
+                <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 p-4 px-6 pb-[calc(2rem+env(safe-area-inset-bottom))] flex gap-3 z-50 max-w-md mx-auto">
                     <Button
                         className="w-full bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-200"
                         onClick={openCompleteModal}
@@ -329,7 +329,7 @@ export default function TaskDetails() {
 
             {/* Footer Actions */}
             {!isOwner && (
-                <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 p-4 px-6 pb-8 flex gap-3 z-50 max-w-md mx-auto">
+                <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 p-4 px-6 pb-[calc(2rem+env(safe-area-inset-bottom))] flex gap-3 z-50 max-w-md mx-auto">
                     <Button
                         variant="secondary"
                         className="flex-1"
