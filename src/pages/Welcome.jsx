@@ -5,13 +5,13 @@ export default function Welcome() {
     const navigate = useNavigate()
 
     return (
-        <div className="relative min-h-screen w-full overflow-hidden font-sans">
+        <div className="relative h-screen w-full overflow-hidden font-sans">
 
             {/* Background: Subtle Gradient */}
             <div className="absolute inset-0 bg-gradient-to-b from-[#EEF3FF] to-white z-0" />
 
             {/* Main Content Container */}
-            <div className="relative z-10 flex flex-col items-center w-full px-6 pt-safe pb-safe max-w-md mx-auto min-h-screen">
+            <div className="relative z-10 flex flex-col items-center w-full px-6 pt-safe pb-safe max-w-md mx-auto h-full">
 
                 {/* Centered Content Wrapper */}
                 <div className="flex-1 flex flex-col items-center justify-center w-full">

@@ -5,10 +5,33 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    /* iOS Safe Area Insets */
+    --sat: env(safe-area-inset-top);
+    --sar: env(safe-area-inset-right);
+    --sab: env(safe-area-inset-bottom);
+    --sal: env(safe-area-inset-left);
+  }
+
+  html {
+    /* Support for iOS dynamic viewport */
+    height: 100%;
+    height: -webkit-fill-available;
+  }
+
   body {
     @apply bg-background text-primary font-sans antialiased selection:bg-accent/20;
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
+
+    /* Ensure body fills viewport on iOS */
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    min-height: 100dvh;
+    /* Dynamic viewport height for modern browsers */
+
+    /* Prevent overscroll bounce on iOS */
+    overscroll-behavior-y: none;
   }
 }
 

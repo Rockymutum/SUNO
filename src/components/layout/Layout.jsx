@@ -41,8 +41,11 @@ export default function Layout() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -8 }}
                         transition={{ duration: 0.2, ease: "easeOut" }}
-                        className={`absolute inset-0 overflow-y-auto overflow-x-hidden bg-background no-scrollbar shadow-none ${isFullScreen ? '' : 'px-5 pt-16 pb-24'
+                        className={`absolute inset-0 overflow-y-auto overflow-x-hidden bg-background no-scrollbar shadow-none ${isFullScreen ? '' : 'px-5 pt-16'
                             }`}
+                        style={!isFullScreen ? {
+                            paddingBottom: 'calc(6rem + env(safe-area-inset-bottom))'
+                        } : {}}
                     >
                         <Outlet context={{ isSearchOpen, setIsSearchOpen }} />
                     </motion.div>
