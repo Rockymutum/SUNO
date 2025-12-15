@@ -14,7 +14,7 @@ export default function BottomNav() {
     ]
 
     return (
-        <nav className="fixed bottom-0 left-0 right-0 bg-surface border-t border-gray-100 pb-safe pt-2 px-6 z-50">
+        <nav className="fixed bottom-0 left-0 right-0 bg-surface border-t border-gray-100 pb-safe pt-2 px-6 z-50 h-auto">
             <div className="grid grid-cols-4 items-center max-w-md mx-auto h-16 w-full">
                 {navItems.map((item) => {
                     const isActive = location.pathname === item.path ||
