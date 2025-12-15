@@ -66,7 +66,7 @@ export default function Discovery() {
     return (
         <div className="relative min-h-full">
             {/* Create Task Floating Button */}
-            <Link to="/task/create" className="fixed bottom-[calc(5rem+env(safe-area-inset-bottom))] right-5 z-40">
+            <Link to="/task/create" className="fixed bottom-[calc(3.5rem+env(safe-area-inset-bottom))] right-5 z-40">
                 <Button
                     variant="primary"
                     size="icon"
