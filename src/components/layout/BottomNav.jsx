@@ -14,8 +14,8 @@ export default function BottomNav() {
     ]
 
     return (
-        <nav className="fixed bottom-0 left-0 right-0 bg-surface border-t border-gray-100 pb-safe px-6 z-50 h-auto">
-            <div className="grid grid-cols-4 items-center max-w-md mx-auto h-12 w-full">
+        <nav className="fixed bottom-0 left-0 right-0 bg-surface border-t border-gray-100 pb-safe pt-2 px-6 z-50 h-auto">
+            <div className="grid grid-cols-4 items-center max-w-md mx-auto h-16 w-full">
                 {navItems.map((item) => {
                     const isActive = location.pathname === item.path ||
                         (item.path !== '/' && location.pathname.startsWith(item.path))
@@ -34,14 +34,14 @@ export default function BottomNav() {
                                 />
                             )}
                             <item.icon
-                                size={24}
+                                size={22}
                                 className={clsx(
                                     "transition-colors duration-200",
                                     isActive ? "text-primary" : "text-gray-400"
                                 )}
                                 strokeWidth={isActive ? 2.5 : 2}
                             />
-                            <span className={clsx("text-[10px] uppercase tracking-wide mt-1 font-semibold", isActive ? "text-primary" : "text-gray-400")}>
+                            <span className={clsx("text-[10px] uppercase tracking-wide mt-1 font-medium", isActive ? "text-primary" : "text-gray-400")}>
                                 {item.name}
                             </span>
                         </Link>
