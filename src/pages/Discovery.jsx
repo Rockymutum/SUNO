@@ -64,7 +64,7 @@ export default function Discovery() {
     }, [isSearchOpen, setIsSearchOpen])
 
     return (
-        <div className="pb-10 relative min-h-full">
+        <div className="relative min-h-full">
             {/* Create Task Floating Button */}
             <Link to="/task/create" className="fixed bottom-20 right-5 z-40">
                 <Button

@@ -7,31 +7,29 @@
 @layer base {
   :root {
     /* iOS Safe Area Insets */
-    --sat: env(safe-area-inset-top);
-    --sar: env(safe-area-inset-right);
-    --sab: env(safe-area-inset-bottom);
-    --sal: env(safe-area-inset-left);
+    --sat: env(safe-area-inset-top, 0px);
+    --sar: env(safe-area-inset-right, 0px);
+    --sab: env(safe-area-inset-bottom, 0px);
+    --sal: env(safe-area-inset-left, 0px);
   }
 
-  html {
-    /* Support for iOS dynamic viewport */
-    height: 100%;
-    height: -webkit-fill-available;
-  }
-
-  body {
+  html,
+  body,
+  #root {
     @apply bg-background text-primary font-sans antialiased selection:bg-accent/20;
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
 
-    /* Ensure body fills viewport on iOS */
-    min-height: 100vh;
-    min-height: -webkit-fill-available;
-    min-height: 100dvh;
-    /* Dynamic viewport height for modern browsers */
-
-    /* Prevent overscroll bounce on iOS */
-    overscroll-behavior-y: none;
+    /* Fixed height approach - most reliable for iOS */
+    width: 100%;
+    height: 100vh;
+    height: 100svh;
+    /* Small viewport height - excludes browser UI */
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    position: fixed;
+    inset: 0;
   }
 }
 

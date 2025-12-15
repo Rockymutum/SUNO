@@ -27,13 +27,13 @@ export default function Layout() {
     }, [location.pathname])
 
     return (
-        <div className="fixed inset-0 bg-background text-primary font-sans flex flex-col overflow-hidden">
+        <div className="w-full h-full bg-background text-primary font-sans flex flex-col overflow-hidden">
             {/* Background fill */}
             <div className="absolute inset-0 z-0 bg-background" />
 
             {showNav && <TopBar onSearchClick={() => setIsSearchOpen(true)} />}
 
-            <main className="flex-1 relative z-10 w-full max-w-md mx-auto">
+            <main className="flex-1 relative z-10 w-full max-w-md mx-auto overflow-hidden">
                 <AnimatePresence mode='wait' initial={false}>
                     <motion.div
                         key={location.pathname}
@@ -41,11 +41,8 @@ export default function Layout() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -8 }}
                         transition={{ duration: 0.2, ease: "easeOut" }}
-                        className={`absolute inset-0 overflow-y-auto overflow-x-hidden bg-background no-scrollbar shadow-none ${isFullScreen ? '' : 'px-5 pt-16'
+                        className={`h-full overflow-y-auto overflow-x-hidden bg-background no-scrollbar ${isFullScreen ? '' : 'px-5 pt-16 pb-24'
                             }`}
-                        style={!isFullScreen ? {
-                            paddingBottom: 'calc(6rem + env(safe-area-inset-bottom))'
-                        } : {}}
                     >
                         <Outlet context={{ isSearchOpen, setIsSearchOpen }} />
                     </motion.div>
